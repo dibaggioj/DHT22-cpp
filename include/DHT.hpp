@@ -15,6 +15,7 @@ class DHT
 {
   public:
 	DHT();
+	static const char *TAG;
 
 	void setDHTgpio(gpio_num_t gpio);
 	void errorHandler(int response);

@@ -16,7 +16,7 @@
 
 #include "../../dht22/include/DHT.hpp"
 
-static char TAG[] = "DHT";
+const char *DHT::TAG = "DHT";
 
 /*-----------------------------------------------------------------------
 ;
@@ -58,18 +58,18 @@ void DHT::errorHandler(int response)
     {
 
     case DHT_TIMEOUT_ERROR:
-        ESP_LOGE(TAG, "Sensor Timeout\n");
+        ESP_LOGE(DHT::TAG, "Sensor Timeout\n");
         break;
 
     case DHT_CHECKSUM_ERROR:
-        ESP_LOGE(TAG, "CheckSum error\n");
+        ESP_LOGE(DHT::TAG, "CheckSum error\n");
         break;
 
     case DHT_OK:
         break;
 
     default:
-        ESP_LOGE(TAG, "Unknown error\n");
+        ESP_LOGE(DHT::TAG, "Unknown error\n");
     }
 }
 
@@ -161,14 +161,14 @@ int DHT::readDHT()
     // == DHT will keep the line low for 80 us and then high for 80us ====
 
     uSec = getSignalLevel(85, 0);
-    ESP_LOGD(TAG, "Response = %d", uSec);
+    ESP_LOGD(DHT::TAG, "Response = %d", uSec);
     if (uSec < 0)
         return DHT_TIMEOUT_ERROR;
 
     // -- 80us up ------------------------
 
     uSec = getSignalLevel(85, 1);
-    ESP_LOGD(TAG, "Response = %d", uSec);
+    ESP_LOGD(DHT::TAG, "Response = %d", uSec);
     if (uSec < 0)
         return DHT_TIMEOUT_ERROR;
 
